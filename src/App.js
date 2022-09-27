@@ -4,11 +4,14 @@ import Home from './pages/Home';
 
 function App() {
   return (
+<AppProvider>
     <div>
-      <AppProvider>
+      
       <Home/>
-      </AppProvider>
+      
+      
     </div>
+    </AppProvider>
   )
 }
 
