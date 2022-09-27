@@ -1,8 +1,14 @@
 import './App.css';
+import { AppProvider } from './components/Context';
+import Home from './pages/Home';
 
 function App() {
   return (
-    <div>app</div>
+    <div>
+      <AppProvider>
+      <Home/>
+      </AppProvider>
+    </div>
   )
 }
 
