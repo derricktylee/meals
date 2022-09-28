@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Favourite() {
   return (
-    <div>Favourite</div>
+    <div className='favourite'>Favourite</div>
   )
 }
