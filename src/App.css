@@ -129,3 +129,31 @@ input{
   border: none;
   cursor: pointer;
 }
+
+.favourite button{
+  overflow: hidden;
+  background-color: transparent;
+  border: none;
+  margin-top: 0.5rem;
+
+}
+.favourite img{
+  overflow: hidden;
+  width: 50px;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: all linear 0.3s;
+}
+
+.favourite{
+  background-color: gray;
+  height: 100px;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  overflow:hidden;
+}
+
+.favourite img:hover{
+  filter: brightness(50%);
+}

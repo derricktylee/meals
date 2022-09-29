@@ -11,7 +11,7 @@ export default function Nav() {
   return (
     <nav>
       <form onSubmit={handleSubmit}>
-        <input id='search' value={search} onChange={handleChange}></input>
+        <input id='search' value={search} onChange={handleChange} placeholder="Search here"></input>
       </form>
     </nav>
   )

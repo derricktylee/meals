@@ -8,6 +8,7 @@ export function AppProvider({children}){
     const [meals, setMeals] = useState([])
     const [search, setsearch] = useState("")
     const [shown, setShown] = useState(false)
+    const [favourite, setFavourite] = useState([])
     const [modalMeal, setModalMeal] = useState({
         id:"",
         img:"",
@@ -33,7 +34,12 @@ export function AppProvider({children}){
     }
 
     function onClickLike(e){
-        console.log(e.target.closest('article').id)
+
+        setFavourite(prevFav=>{
+            console.log(prevFav)
+            if(prevFav.filter(meal=>meal[0].id==e.target.closest('article').id).length==0)
+            {return [...prevFav,meals.filter(meal=>meal.id==e.target.closest('article').id)]}
+        else{return prevFav.filter(meal=>meal[0].id!==e.target.closest('article').id)}})
         setMeals(prevMeals=>{
             return(
                 prevMeals.map(
@@ -75,7 +81,7 @@ export function AppProvider({children}){
     },[search])
 
 
-    return <AppContext.Provider value={{onClickLike,onClickClose,modalMeal,meals,handleChange,search,onClickImg,shown}}>{children}</AppContext.Provider>
+    return <AppContext.Provider value={{favourite,onClickLike,onClickClose,modalMeal,meals,handleChange,search,onClickImg,shown}}>{children}</AppContext.Provider>
 }
 
 export function useGlobalContext(){
