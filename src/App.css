@@ -130,11 +130,13 @@ input{
   cursor: pointer;
 }
 
-.favourite button{
+.favourite-icon{
   overflow: hidden;
   background-color: transparent;
   border: none;
   margin-top: 0.5rem;
+  margin-right: 1rem;
+  
 
 }
 .favourite img{
@@ -143,6 +145,7 @@ input{
   border-radius: 100%;
   cursor: pointer;
   transition: all linear 0.3s;
+
 }
 
 .favourite{
@@ -154,6 +157,28 @@ input{
   overflow:hidden;
 }
 
+.fav-container{
+  display: flex;
+}
+
 .favourite img:hover{
   filter: brightness(50%);
 }
+
+.cross{
+  position: absolute;
+  transform: translate(-1.3rem, -0.2rem);
+  color: darkred;
+  font-size: 1rem;
+  transition: all 0.3s linear;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+}
+
+.cross:hover{
+  color: red;
+}
+
+

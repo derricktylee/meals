@@ -5,10 +5,11 @@ const AppContext = createContext()
 
 export function AppProvider({children}){
 
+
     const [meals, setMeals] = useState([])
     const [search, setsearch] = useState("")
     const [shown, setShown] = useState(false)
-    const [favourite, setFavourite] = useState([])
+    const [favourite, setFavourite] = useState(JSON.parse(localStorage.getItem("favourite"))||[])
     const [modalMeal, setModalMeal] = useState({
         id:"",
         img:"",
@@ -17,6 +18,7 @@ export function AppProvider({children}){
         category:"",
         name:""
     })
+
     
 
     function handleChange(e){
@@ -26,7 +28,7 @@ export function AppProvider({children}){
 
     function onClickImg(e){
         setShown(true)
-        setModalMeal(meals.filter(item=>item.id==e.target.parentElement.id))
+        setModalMeal(meals.find(item=>item.id==e.target.parentElement.id))
     }
 
     function onClickClose(){
@@ -34,12 +36,12 @@ export function AppProvider({children}){
     }
 
     function onClickLike(e){
-
+        
         setFavourite(prevFav=>{
-            console.log(prevFav)
-            if(prevFav.filter(meal=>meal[0].id==e.target.closest('article').id).length==0)
-            {return [...prevFav,meals.filter(meal=>meal.id==e.target.closest('article').id)]}
-        else{return prevFav.filter(meal=>meal[0].id!==e.target.closest('article').id)}})
+            if(prevFav.filter(meal=>meal.id==e.target.closest('article').id).length==0)
+            { const favMeal = meals.filter(meal=>meal.id==e.target.closest('article').id)[0]
+                return [...prevFav,favMeal]}
+        else{return prevFav.filter(meal=>meal.id!==e.target.closest('article').id)}})
         setMeals(prevMeals=>{
             return(
                 prevMeals.map(
@@ -49,6 +51,11 @@ export function AppProvider({children}){
                 )
             )
         })
+    }
+
+    function onClickFav(e){
+        setShown(true)
+        setModalMeal(favourite.find(item=>item.id==e.target.id))
     }
 
 
@@ -67,7 +74,8 @@ export function AppProvider({children}){
                     instruction:strInstructions,
                     area:strArea,
                     category:strCategory,
-                    like:false}
+                    like:false,
+                    cross:false}
                 )
             })
             setMeals(meal)
@@ -76,12 +84,38 @@ export function AppProvider({children}){
         }
 
     }
+
+
+    function handleMouseOver(e){
+        setFavourite(prevFav=>prevFav.map(item=>item.id==e.target.parentElement.id?{...item,cross:true}:item))
+    }
+
+
+    function handleMouseOut(e){
+        setFavourite(prevFav=>prevFav.map(item=>item.id==e.target.parentElement.id?{...item,cross:false}:item))
+    }
+
+    function delFav(e){
+
+        console.log(favourite)
+
+        setFavourite(prevFav=>prevFav.filter(item=>item.id!=e.target.closest(".favourite-icon").id))
+    }
+
     useEffect(()=>{
         fetchData()
     },[search])
 
+    useEffect(()=>{
+        localStorage.setItem("favourite", JSON.stringify(favourite))
+    },[favourite])
 
-    return <AppContext.Provider value={{favourite,onClickLike,onClickClose,modalMeal,meals,handleChange,search,onClickImg,shown}}>{children}</AppContext.Provider>
+
+
+
+
+
+    return <AppContext.Provider value={{delFav,handleMouseOver,handleMouseOut,onClickFav,favourite,onClickLike,onClickClose,modalMeal,meals,handleChange,search,onClickImg,shown}}>{children}</AppContext.Provider>
 }
 
 export function useGlobalContext(){

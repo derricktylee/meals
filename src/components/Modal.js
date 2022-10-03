@@ -5,7 +5,7 @@ export default function Modal() {
 
   const{modalMeal,onClickClose} = useGlobalContext()
   console.log(modalMeal)
-  const{id, img, instruction, area, category,name} = modalMeal[0]
+  const{id, img, instruction, area, category,name} = modalMeal
   return (
     <section className='modal-container'>
       <div className='modal'>

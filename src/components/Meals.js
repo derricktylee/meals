@@ -6,7 +6,7 @@ import Modal from './Modal'
 
 export default function Meals() {
 
-    const {meals, onClickImg,shown,onClickLike} = useGlobalContext()
+    const {meals, onClickImg,shown,onClickLike,favourite} = useGlobalContext()
   return (
     <section className='meal-content-container'>
         <div className='meal-content'>
@@ -17,7 +17,7 @@ export default function Meals() {
                 <img src={img} onClick={onClickImg}/>
                 <div className="like-container">
                 <h5>{name}</h5>
-                <button onClick={onClickLike}>{like?<BsFillHeartFill/>:<BsHeart/>}</button>
+                <button onClick={onClickLike}>{favourite.find(item=>item.id==id)?<BsFillHeartFill/>:<BsHeart/>}</button>
                 </div></article>
                 
         )})}
