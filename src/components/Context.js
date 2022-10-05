@@ -56,7 +56,7 @@ export function AppProvider({children}){
     function onClickFav(e){
         setShown(true)
         setModalMeal(favourite.filter(item=>item.id!==e.target.id)[0])
-        console.log(favourite.filter(item=>item.id!==e.target.id))
+
     }
 
 
