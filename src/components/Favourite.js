@@ -12,7 +12,6 @@ export default function Favourite() {
       >
         <div className="favourite-container" onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOut}>
         <img src={item.img} />
-        {item.cross&&<button className='cross' onClick={delFav}><AiFillCloseCircle/></button>}
         </div>
         
       </div>)}
